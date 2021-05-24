@@ -1,9 +1,10 @@
-SELECT 
-    i.total,
-    (c.FirstName + c.LastName) as c.Name,
-    c.country,
-    e.name
-FROM Invoice i
-JOIN customer c ON c.CustomerId = i.CustomerId
-JOIN employee e ON e.EmployeeId = c.salesRepId
-GROUP BY InvoiceId
+SELECT
+    InvoiceId,
+    Total,
+    BillingCountry,
+    customer.FirstName || " " || customer.Lastname as "CustomerName",
+    employee.FirstName || " " || employee.LastName as "EmployeeName"
+FROM Invoice
+JOIN customer ON invoice.customerId = customer.CustomerId
+JOIN employee ON employee.employeeId = customer.supportRepId
+Order By CustomerName
